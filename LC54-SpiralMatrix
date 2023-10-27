@@ -1,0 +1,17 @@
+class Solution(object):
+    def spiralOrder(self, matrix):
+        visited = set()
+        spiral = []
+        def dfs(row, col, going_up):
+            if not(row<0 or row>=len(matrix) or col<0 or col>=len(matrix[0]) or (row,col) in visited):
+                visited.add((row,col))
+                spiral.append(matrix[row][col])
+                if going_up:
+                    dfs(row-1,col, True)
+                dfs(row, col+1, False)
+                dfs(row+1,col,False)
+                dfs(row,col-1,False)
+                dfs(row-1,col,True)
+                
+        dfs(0,0, False)
+        return spiral
