@@ -1,0 +1,29 @@
+class Solution(object):
+    def searchMatrix(self, matrix, target):
+
+        t = 0
+        b = len(matrix) - 1
+        while t <= b:
+            m = (t + b) // 2
+            if matrix[m][-1] < target:
+                t = m + 1
+            elif matrix[m][0] > target:
+                b = m - 1
+            else:
+                break
+
+        if not(t <= b):
+            return False
+        
+        level = (t+b)//2
+        l = 0
+        r = len(matrix[0]) - 1
+        while l <= r:
+            m = (l+r) // 2
+            if matrix[level][m] == target:
+                return True
+            elif matrix[level][m] < target:
+                l = m + 1
+            elif matrix[level][m] > target:
+                r = m - 1
+        return False
